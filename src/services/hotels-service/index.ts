@@ -36,6 +36,7 @@ async function getHotelsWithRooms(userId: number, hotelId: number) {
 }
 
 const hotelService = {
+  listHotels,
   getHotels,
   getHotelsWithRooms,
 };

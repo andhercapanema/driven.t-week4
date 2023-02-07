@@ -12,7 +12,7 @@ async function findWithAddressByUserId(userId: number) {
 
 async function findById(enrollmentId: number) {
   return prisma.enrollment.findFirst({
-    where: { id: enrollmentId }
+    where: { id: enrollmentId },
   });
 }
 
@@ -25,8 +25,8 @@ async function upsert(
     where: {
       userId,
     },
-    create: createdEnrollment,
-    update: updatedEnrollment,
+    create: { ...createdEnrollment, birthday: new Date(createdEnrollment.birthday) },
+    update: { ...updatedEnrollment, birthday: new Date(updatedEnrollment.birthday) },
   });
 }
 
