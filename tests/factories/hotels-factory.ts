@@ -7,7 +7,27 @@ export async function createHotel() {
     data: {
       name: faker.name.findName(),
       image: faker.image.imageUrl(),
-    }
+    },
+  });
+}
+
+export async function createRandomRoomWithHotelId(hotelId: number) {
+  return prisma.room.create({
+    data: {
+      name: faker.name.firstName(),
+      capacity: faker.datatype.number(),
+      hotelId: hotelId,
+    },
+  });
+}
+
+export async function createOccupiedRoomWithHotelId(hotelId: number) {
+  return prisma.room.create({
+    data: {
+      name: faker.name.firstName(),
+      capacity: 0,
+      hotelId: hotelId,
+    },
   });
 }
 
@@ -17,6 +37,12 @@ export async function createRoomWithHotelId(hotelId: number) {
       name: "1020",
       capacity: 3,
       hotelId: hotelId,
-    }
+    },
+  });
+}
+
+export async function createBooking(userId: number, roomId: number) {
+  return prisma.booking.create({
+    data: { userId, roomId },
   });
 }
