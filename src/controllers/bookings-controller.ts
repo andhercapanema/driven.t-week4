@@ -32,6 +32,10 @@ export async function postNewBooking(req: AuthenticatedRequest, res: Response) {
       return res.status(httpStatus.FORBIDDEN).send(error.message);
     }
 
+    if (error.name === "CannotListHotelsError") {
+      return res.status(httpStatus.PAYMENT_REQUIRED).send(error.message);
+    }
+
     return res.status(httpStatus.FORBIDDEN).send(error);
   }
 }
@@ -51,6 +55,10 @@ export async function changeRoom(req: AuthenticatedRequest, res: Response) {
 
     if (error.name === "ForbiddenError") {
       return res.status(httpStatus.FORBIDDEN).send(error.message);
+    }
+
+    if (error.name === "CannotListHotelsError") {
+      return res.status(httpStatus.PAYMENT_REQUIRED).send(error.message);
     }
 
     return res.status(httpStatus.FORBIDDEN).send(error);
